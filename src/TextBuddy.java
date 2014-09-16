@@ -107,6 +107,12 @@ public class TextBuddy {
 			case "clear":
 				clearTextFromFile();
 				break;
+			case "sort":
+				sortTextFromFile();
+				break;
+			case "search":
+				searchTextFromFile(sc.nextLine().trim());
+				break;
 			case "exit":
 				exit = true;
 				break;
@@ -165,15 +171,25 @@ public class TextBuddy {
 			printMessage(ERROR_CLEARING_TEXT);
 		}
 	}
+	
+	private static void sortTextFromFile() {
+		
+	}
+	
+	private static void searchTextFromFile(String searchTerm) {
+		
+	}
+
 
 	/**
 	 * Get the filename of the text file.
 	 * 
 	 * @return filename of the text file.
 	 */
-	public static String getFileName() {
+	private static String getFileName() {
 		return path.getFileName().toString();
 	}
+	
 
 	/**
 	 * To add content to text file.
