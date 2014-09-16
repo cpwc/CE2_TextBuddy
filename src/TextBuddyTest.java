@@ -1,6 +1,8 @@
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -17,7 +19,25 @@ public class TextBuddyTest {
 
 	@Test
 	public void testSortEmpty() {
-		assertEquals(FILE_NAME + " is empty", TextBuddy.sortText());
+		TextBuddy.clearText();
+		
+		List<String> list = TextBuddy.sortText();
+		assertThat(list.isEmpty(), is(true));
+	}
+	
+	@Test
+	public void testSort() {
+		TextBuddy.addText("cccc");
+		TextBuddy.addText("aaaa");
+		TextBuddy.addText("bbbb");
+		
+		List<String> list = TextBuddy.sortText();
+		
+		// Not empty.
+		assertThat(list.isEmpty(), is(false));
+		
+		// Check sorted.
+		assertEquals("[aaaa, bbbb, cccc]", list.toString());
 	}
 
 }

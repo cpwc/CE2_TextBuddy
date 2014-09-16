@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -173,15 +174,23 @@ public class TextBuddy {
 			printMessage(ERROR_CLEARING_TEXT);
 		}
 	}
-	
+
 	private static void sortTextFromFile() {
-		printMessage(sortText());
-	}
-	
-	private static void searchTextFromFile(String searchTerm) {
-		
+		List<String> list = sortText();
+
+		if (list == null) {
+			printMessage("Unexpected error!");
+		} else if (list.isEmpty()) {
+			printMessage(String.format(MESSAGE_SORT_EMPTY, getFileName()));
+		} else {
+			printMessage(String.format(MESSAGE_SORT_SUCCESS, getFileName()));
+		}
+
 	}
 
+	private static void searchTextFromFile(String searchTerm) {
+
+	}
 
 	/**
 	 * Get the filename of the text file.
@@ -191,7 +200,6 @@ public class TextBuddy {
 	private static String getFileName() {
 		return path.getFileName().toString();
 	}
-	
 
 	/**
 	 * To add content to text file.
@@ -244,7 +252,7 @@ public class TextBuddy {
 	 * 
 	 * @return true if the overwriting file with empty contents is successful.
 	 */
-	private static boolean clearText() {
+	public static boolean clearText() {
 		try {
 			Files.write(path, new byte[0], StandardOpenOption.TRUNCATE_EXISTING);
 			return true;
@@ -264,7 +272,9 @@ public class TextBuddy {
 		try {
 			List<String> list = Files.readAllLines(path,
 					Charset.defaultCharset());
+
 			String temp = list.remove(lineNumber - 1);
+
 			Files.write(path, list, Charset.defaultCharset(),
 					StandardOpenOption.CREATE,
 					StandardOpenOption.TRUNCATE_EXISTING);
@@ -273,19 +283,20 @@ public class TextBuddy {
 			return null;
 		}
 	}
-	
-	public static String sortText() {
+
+	public static List<String> sortText() {
 		try {
 			List<String> list = Files.readAllLines(path,
 					Charset.defaultCharset());
 
-			if (list.isEmpty()) {
-				return String.format(MESSAGE_SORT_EMPTY, getFileName());
-			}
-			
-			return String.format(MESSAGE_SORT_SUCCESS, getFileName());
+			Collections.sort(list);
+			Files.write(path, list, Charset.defaultCharset(),
+					StandardOpenOption.CREATE,
+					StandardOpenOption.TRUNCATE_EXISTING);
+
+			return list;
 		} catch (Exception ex) {
-			return ex.getMessage();
+			return null;
 		}
 	}
 
