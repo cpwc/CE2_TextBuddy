@@ -13,6 +13,8 @@ import java.util.Scanner;
 /**
  * CS2103T (AY2014/15 Semester 1) CE2: TextBuddy++ Group: T17-3J
  * 
+ * TextBuddy++
+ * 
  * @author WeiCheng (A0111815R)
  * 
  */
@@ -175,6 +177,9 @@ public class TextBuddy {
 		}
 	}
 
+	/**
+	 * Method to call sortText function from command method.
+	 */
 	private static void sortTextFromFile() {
 		List<String> list = sortText();
 
@@ -188,6 +193,12 @@ public class TextBuddy {
 
 	}
 
+	/**
+	 * Method to call searchText function from command method.
+	 * 
+	 * @param keyword
+	 *            to search for.
+	 */
 	private static void searchTextFromFile(String keyword) {
 		List<String> list = searchText(keyword);
 
@@ -287,6 +298,11 @@ public class TextBuddy {
 		}
 	}
 
+	/**
+	 * Sort text in file in alphabetical order.
+	 * 
+	 * @return List<String> of text is sorted.
+	 */
 	public static List<String> sortText() {
 		try {
 			List<String> list = Files.readAllLines(path,
@@ -303,6 +319,13 @@ public class TextBuddy {
 		}
 	}
 
+	/**
+	 * Search for word in text in file.
+	 * 
+	 * @param keyword
+	 *            to search for.
+	 * @return List<String> of text that matches given keyword.
+	 */
 	public static List<String> searchText(String keyword) {
 		try {
 			List<String> list = Files.readAllLines(path,
@@ -331,6 +354,12 @@ public class TextBuddy {
 		System.out.println(message);
 	}
 
+	/**
+	 * Method to prints out a list of text.
+	 * 
+	 * @param list
+	 *            of text to print.
+	 */
 	private static void printList(List<String> list) {
 		int lineNumber = 1;
 

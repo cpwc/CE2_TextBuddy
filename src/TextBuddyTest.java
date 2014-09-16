@@ -1,5 +1,5 @@
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -7,6 +7,14 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+/**
+ * CS2103T (AY2014/15 Semester 1) CE2: TextBuddy++ Group: T17-3J
+ * 
+ * Unit test for TextBuddy++ Sort and Search functions using TDD method.
+ * 
+ * @author WeiCheng (A0111815R)
+ *
+ */
 public class TextBuddyTest {
 
 	private static final String FILE_NAME = "mytextfile.txt";
