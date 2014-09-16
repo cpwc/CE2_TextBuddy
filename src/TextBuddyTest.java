@@ -100,7 +100,7 @@ public class TextBuddyTest {
 		// Check search result.
 		assertEquals("[test, your test case, their case test]", list.toString());
 	}
-	
+
 	@Test
 	public void testSearch2() {
 		TextBuddy.clearText();

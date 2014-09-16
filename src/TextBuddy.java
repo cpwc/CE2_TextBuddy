@@ -179,7 +179,7 @@ public class TextBuddy {
 		List<String> list = sortText();
 
 		if (list == null) {
-			printMessage("Unexpected error!");
+			printMessage(ERROR_IO);
 		} else if (list.isEmpty()) {
 			printMessage(String.format(MESSAGE_EMPTY, getFileName()));
 		} else {
@@ -190,13 +190,13 @@ public class TextBuddy {
 
 	private static void searchTextFromFile(String keyword) {
 		List<String> list = searchText(keyword);
-		
+
 		if (list == null) {
-			printMessage("Unexpected error!");
+			printMessage(ERROR_IO);
 		} else if (list.isEmpty()) {
 			printMessage(String.format(MESSAGE_EMPTY, getFileName()));
 		} else {
-			printMessage(String.format(MESSAGE_SORT_SUCCESS, getFileName()));
+			printList(list);
 		}
 	}
 
@@ -242,12 +242,7 @@ public class TextBuddy {
 				return false;
 			}
 
-			int lineNumber = 1;
-			for (String line : list) {
-				printMessage(String.format(MESSAGE_LINE_NUMBER, lineNumber,
-						line));
-				lineNumber++;
-			}
+			printList(list);
 
 			return true;
 		} catch (Exception ex) {
@@ -307,14 +302,14 @@ public class TextBuddy {
 			return null;
 		}
 	}
-	
+
 	public static List<String> searchText(String keyword) {
 		try {
 			List<String> list = Files.readAllLines(path,
 					Charset.defaultCharset());
-			
+
 			List<String> filteredList = new ArrayList<String>();
-			
+
 			for (String line : list) {
 				if (line.toLowerCase().contains(keyword.toLowerCase())) {
 					filteredList.add(line);
@@ -334,5 +329,14 @@ public class TextBuddy {
 	 */
 	private static void printMessage(String message) {
 		System.out.println(message);
+	}
+
+	private static void printList(List<String> list) {
+		int lineNumber = 1;
+
+		for (String line : list) {
+			printMessage(String.format(MESSAGE_LINE_NUMBER, lineNumber, line));
+			lineNumber++;
+		}
 	}
 }
