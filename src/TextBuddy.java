@@ -309,7 +309,22 @@ public class TextBuddy {
 	}
 	
 	public static List<String> searchText(String keyword) {
-		return new ArrayList<String>();
+		try {
+			List<String> list = Files.readAllLines(path,
+					Charset.defaultCharset());
+			
+			List<String> filteredList = new ArrayList<String>();
+			
+			for (String line : list) {
+				if (line.contains(keyword)) {
+					filteredList.add(line);
+				}
+			}
+
+			return filteredList;
+		} catch (Exception ex) {
+			return null;
+		}
 	}
 
 	/**
