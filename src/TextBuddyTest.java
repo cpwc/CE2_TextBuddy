@@ -26,7 +26,9 @@ public class TextBuddyTest {
 	}
 	
 	@Test
-	public void testSort() {
+	public void testSort1() {
+		TextBuddy.clearText();
+		
 		TextBuddy.addText("cccc");
 		TextBuddy.addText("aaaa");
 		TextBuddy.addText("bbbb");
@@ -38,6 +40,23 @@ public class TextBuddyTest {
 		
 		// Check sorted.
 		assertEquals("[aaaa, bbbb, cccc]", list.toString());
+	}
+	
+	@Test
+	public void testSort2() {
+		TextBuddy.clearText();
+	
+		TextBuddy.addText("CCCC");
+		TextBuddy.addText("aaaa");
+		TextBuddy.addText("xxxx");
+		
+		List<String> list = TextBuddy.sortText();
+		
+		// Not empty.
+		assertThat(list.isEmpty(), is(false));
+		
+		// Check sorted.
+		assertEquals("[aaaa, CCCC, xxxx]", list.toString());
 	}
 
 }
