@@ -58,5 +58,22 @@ public class TextBuddyTest {
 		// Check sorted.
 		assertEquals("[aaaa, CCCC, xxxx]", list.toString());
 	}
+	
+	@Test
+	public void testSort3() {
+		TextBuddy.clearText();
+	
+		TextBuddy.addText("CCCC");
+		TextBuddy.addText("dsfbgtddd2");
+		TextBuddy.addText("dfhvi341j12e32");
+		
+		List<String> list = TextBuddy.sortText();
+		
+		// Not empty.
+		assertThat(list.isEmpty(), is(false));
+		
+		// Check sorted.
+		assertEquals("[CCCC, dfhvi341j12e32, dsfbgtddd2]", list.toString());
+	}	
 
 }
