@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -289,7 +290,7 @@ public class TextBuddy {
 			List<String> list = Files.readAllLines(path,
 					Charset.defaultCharset());
 
-			Collections.sort(list);
+			Collections.sort(list, new SortIgnoreCase());
 			Files.write(path, list, Charset.defaultCharset(),
 					StandardOpenOption.CREATE,
 					StandardOpenOption.TRUNCATE_EXISTING);
