@@ -100,5 +100,22 @@ public class TextBuddyTest {
 		// Check search result.
 		assertEquals("[test, your test case, their case test]", list.toString());
 	}
+	
+	@Test
+	public void testSearch2() {
+		TextBuddy.clearText();
+		TextBuddy.addText("test");
+		TextBuddy.addText("my case");
+		TextBuddy.addText("your TEST case");
+		TextBuddy.addText("their case test");
+
+		List<String> list = TextBuddy.searchText("test");
+
+		// Not empty.
+		assertThat(list.isEmpty(), is(false));
+
+		// Check search result.
+		assertEquals("[test, your TEST case, their case test]", list.toString());
+	}
 
 }
