@@ -316,7 +316,7 @@ public class TextBuddy {
 			List<String> filteredList = new ArrayList<String>();
 			
 			for (String line : list) {
-				if (line.contains(keyword)) {
+				if (line.toLowerCase().contains(keyword.toLowerCase())) {
 					filteredList.add(line);
 				}
 			}
