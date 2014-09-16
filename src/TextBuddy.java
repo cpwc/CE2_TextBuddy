@@ -23,6 +23,8 @@ public class TextBuddy {
 	private static final String MESSAGE_DELETED = "deleted from %s: \"%s\"";
 	private static final String MESSAGE_CLEAR = "all content deleted from %s";
 	private static final String MESSAGE_LINE_NUMBER = "%s. %s";
+	private static final String MESSAGE_SORT_SUCCESS = "sorted %s successfully";
+	private static final String MESSAGE_SORT_EMPTY = "%s is empty";
 
 	private static final String ERROR_IO = "Unexpected IO error.";
 	private static final String ERROR_CLEARING_TEXT = "Error clearing text file. Please try again.";
@@ -173,7 +175,7 @@ public class TextBuddy {
 	}
 	
 	private static void sortTextFromFile() {
-		
+		printMessage(sortText());
 	}
 	
 	private static void searchTextFromFile(String searchTerm) {
@@ -242,7 +244,7 @@ public class TextBuddy {
 	 * 
 	 * @return true if the overwriting file with empty contents is successful.
 	 */
-	public static boolean clearText() {
+	private static boolean clearText() {
 		try {
 			Files.write(path, new byte[0], StandardOpenOption.TRUNCATE_EXISTING);
 			return true;
@@ -258,7 +260,7 @@ public class TextBuddy {
 	 *            the line number to be deleted from text file.
 	 * @return true if line is successfully deleted from text file.
 	 */
-	public static String deleteText(int lineNumber) {
+	private static String deleteText(int lineNumber) {
 		try {
 			List<String> list = Files.readAllLines(path,
 					Charset.defaultCharset());
@@ -269,6 +271,21 @@ public class TextBuddy {
 			return temp;
 		} catch (Exception ex) {
 			return null;
+		}
+	}
+	
+	public static String sortText() {
+		try {
+			List<String> list = Files.readAllLines(path,
+					Charset.defaultCharset());
+
+			if (list.isEmpty()) {
+				return String.format(MESSAGE_SORT_EMPTY, getFileName());
+			}
+			
+			return String.format(MESSAGE_SORT_SUCCESS, getFileName());
+		} catch (Exception ex) {
+			return ex.getMessage();
 		}
 	}
 
