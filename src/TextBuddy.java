@@ -5,8 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,7 +26,6 @@ public class TextBuddy {
 	private static final String MESSAGE_CLEAR = "all content deleted from %s";
 	private static final String MESSAGE_LINE_NUMBER = "%s. %s";
 	private static final String MESSAGE_SORT_SUCCESS = "sorted %s successfully";
-	private static final String MESSAGE_SORT_EMPTY = "%s is empty";
 
 	private static final String ERROR_IO = "Unexpected IO error.";
 	private static final String ERROR_CLEARING_TEXT = "Error clearing text file. Please try again.";
@@ -182,15 +181,23 @@ public class TextBuddy {
 		if (list == null) {
 			printMessage("Unexpected error!");
 		} else if (list.isEmpty()) {
-			printMessage(String.format(MESSAGE_SORT_EMPTY, getFileName()));
+			printMessage(String.format(MESSAGE_EMPTY, getFileName()));
 		} else {
 			printMessage(String.format(MESSAGE_SORT_SUCCESS, getFileName()));
 		}
 
 	}
 
-	private static void searchTextFromFile(String searchTerm) {
-
+	private static void searchTextFromFile(String keyword) {
+		List<String> list = searchText(keyword);
+		
+		if (list == null) {
+			printMessage("Unexpected error!");
+		} else if (list.isEmpty()) {
+			printMessage(String.format(MESSAGE_EMPTY, getFileName()));
+		} else {
+			printMessage(String.format(MESSAGE_SORT_SUCCESS, getFileName()));
+		}
 	}
 
 	/**
@@ -299,6 +306,10 @@ public class TextBuddy {
 		} catch (Exception ex) {
 			return null;
 		}
+	}
+	
+	public static List<String> searchText(String keyword) {
+		return new ArrayList<String>();
 	}
 
 	/**

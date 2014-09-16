@@ -74,6 +74,14 @@ public class TextBuddyTest {
 		
 		// Check sorted.
 		assertEquals("[CCCC, dfhvi341j12e32, dsfbgtddd2]", list.toString());
-	}	
+	}
+	
+	@Test
+	public void testSearchEmpty() {
+		TextBuddy.clearText();
+		
+		List<String> list = TextBuddy.searchText("test");
+		assertThat(list.isEmpty(), is(true));
+	}
 
 }
